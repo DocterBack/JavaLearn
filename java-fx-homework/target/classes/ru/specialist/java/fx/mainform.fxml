@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.*?>
+<GridPane alignment="CENTER" hgap="10.0" vgap="10.0" xmlns="http://javafx.com/javafx/11.0.1"
+          xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.specialist.java.fx.controller.MainFormController">
+
+    <padding>
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+    </padding>
+    <TableView fx:id="tableAuthors" editable="true" onKeyPressed="#keyPressed" stylesheets="@styles.css"
+               GridPane.columnIndex="0" GridPane.rowIndex="1">
+        <contextMenu>
+            <ContextMenu fx:id="contextMenu">
+                <items>
+                    <MenuItem onAction="#deleteRow" text="Удалить" accelerator="Del"/>
+                </items>
+            </ContextMenu>
+        </contextMenu>
+        <columns>
+            <TableColumn fx:id="authorNameColumn" onEditCommit="#editAuthorName" prefWidth="150.0" text="Имя">
+                <cellValueFactory>
+                    <PropertyValueFactory property="authorName"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="lastNameColumn" onEditCommit="#editLastName" prefWidth="150.0" text="Фамилия">
+                <cellValueFactory>
+                    <PropertyValueFactory property="lastName"/>
+                </cellValueFactory>
+            </TableColumn>
+        </columns>
+        <sortOrder>
+            <fx:reference source="lastNameColumn"/>
+        </sortOrder>
+        <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+        </columnResizePolicy>
+    </TableView>
+    <HBox alignment="BOTTOM_LEFT" spacing="10.0" GridPane.columnIndex="0" GridPane.rowIndex="2">
+        <TextField fx:id="authorNameField" promptText="Имя"/>
+        <TextField fx:id="lastNameField" onAction="#addPerson" promptText="Фамилия"/>
+        <Button onAction="#addPerson" text="Добавить"/>
+    </HBox>
+    <MenuBar GridPane.columnIndex="0" GridPane.rowIndex="0">
+        <Menu text="_Файл">
+            <MenuItem onAction="#buttonExitClick" text="_Выход" />
+        </Menu>
+        <Menu text="_Правка">
+            <MenuItem onAction="#deleteRow" text="_Удалить"  accelerator="Del"/>
+        </Menu>
+        <Menu text="_Справка">
+            <MenuItem text="_О программе"/>
+        </Menu>
+    </MenuBar>
+    <columnConstraints>
+        <ColumnConstraints/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints/>
+        <RowConstraints/>
+        <RowConstraints/>
+    </rowConstraints>
+</GridPane>
